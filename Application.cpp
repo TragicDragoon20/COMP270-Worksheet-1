@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Application.h"
+#include "math.h"
 
 // Constructor -- initialise application-specific data here
 Application::Application()
@@ -53,7 +54,15 @@ void Application::render()
 // So for example a position of 1.2f means 0.2 along the second curve (the curve at index 1).
 void Application::drawCarOnTrack(float position)
 {
-	// TODO
+	// Splits the position into its corresponding integer and float
+	// In order to get which curve the car is on and at what point along that curve it is
+	int i = static_cast<int>(position);
+	float x = fmodf(position, 1.0f);
+	// Gets the position for where the car should be on the bezier curve
+	Vector2 carPos = m_track[i].BezierCurve(x);
+	// Rotates the tangent by 90.f to get the direction the car should be facing
+	float carFacingAngle = 90.f + m_track[i].GetBezierTangent(x);
+	drawCar(carPos, carFacingAngle);
 }
 
 // Called on each frame to advance the car position variable
