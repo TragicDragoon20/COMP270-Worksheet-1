@@ -55,13 +55,14 @@ void Application::render()
 void Application::drawCarOnTrack(float position)
 {
 	// Splits the position into its corresponding integer and float
-	// In order to get which curve the car is on and at what point along that curve it is
+	// In order to get which curve the car is on
 	int i = static_cast<int>(position);
-	float x = fmodf(position, 1.0f);
+	//To get what point along that curve the car is
+	float pointOnCurve = fmodf(position, 1.0f);
 	// Gets the position for where the car should be on the bezier curve
-	Vector2 carPos = m_track[i].BezierCurve(x);
+	carPos = m_track[i].BezierCurve(pointOnCurve);
 	// Rotates the tangent by 90.f to get the direction the car should be facing
-	float carFacingAngle = 90.f + m_track[i].GetBezierTangent(x);
+	float carFacingAngle = 90.f + m_track[i].GetBezierTangent(pointOnCurve);
 	drawCar(carPos, carFacingAngle);
 }
 
