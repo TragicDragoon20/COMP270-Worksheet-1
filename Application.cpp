@@ -69,8 +69,15 @@ void Application::drawCarOnTrack(float position)
 // Called on each frame to advance the car position variable
 void Application::updateCarPosition()
 {
+	// Gets the next point for where the car will be on the curve
+	float nextCarPos = fmodf(m_carPosition + 0.1f, m_track.size());
+	int i = static_cast<int>(nextCarPos);
+	Vector2 nextCarVector = m_track[i].BezierCurve(fmodf(nextCarPos, 1.0f));
+
+	// Gets the distance between the current and new position
+	float distance = Bezier::GetDistance(carPos, nextCarVector);
 	// Increment the car position
-	m_carPosition += 0.01f;
+	m_carPosition += (1 / distance) * carSpeed;
 
 	// Wrap the car position to be in the range 0 to m_track.size()
 	m_carPosition = fmodf(m_carPosition, m_track.size());

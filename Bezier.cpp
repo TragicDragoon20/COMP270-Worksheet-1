@@ -38,7 +38,6 @@ Vector2 Bezier::BezierCurveTangent(float t) const
 	return (3 * pow(1 - t, 2) * (p1 - p0)) + (6 * (1 - t) * t * (p2 - p1)) + (3 * pow(t, 2) * (p3 - p2));
 }
 
-
 // used to calculate the angle of each tangent and convert to degrees
 float Bezier::GetBezierTangent(float x) const
 {
@@ -46,3 +45,13 @@ float Bezier::GetBezierTangent(float x) const
 	const float rad = atan2f(tangentVector.y, tangentVector.x);
 	return rad * (180.f / M_PI);
 }
+
+float Bezier::GetDistance(Vector2 currentCarVector, Vector2 nextCarVector)
+{
+	float xDifference = currentCarVector.x - nextCarVector.x;
+	float yDifference = currentCarVector.y - nextCarVector.y;
+
+	
+	return sqrt(xDifference * xDifference + yDifference * yDifference);
+}
+
