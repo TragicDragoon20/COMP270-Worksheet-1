@@ -10,7 +10,7 @@ public:
 	Vector2 BezierCurve(float x) const;
 	Vector2 BezierCurveTangent(float t) const;
 	float GetBezierTangent(float x) const;
-	static float GetDistance(Vector2 currentCarPos, Vector2 nextCarPos);
+	static float GetDistance(Vector2 currentCarVector, Vector2 nextCarVector);
 
 	
 private:
