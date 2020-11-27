@@ -11,15 +11,21 @@ void Bezier::draw(SDL_Renderer *renderer) const
 {
 	// Value used to determine the accuracy of the bezier curve
 	const int numOfLineSegments = 20;
-	
+	Vector2 pos[2];
 	for (float i = 0; i < numOfLineSegments; i++)
 	{
 		// Creates a vector2 array to add 2 points to that are used to draw lines between the two points
-		Vector2 pos[] =
+		if (i == 0)
 		{
-			BezierCurve(i / numOfLineSegments),
-			BezierCurve((i + 1) / numOfLineSegments)
-		};
+			pos[0] = BezierCurve(i / numOfLineSegments),
+				pos[1] = BezierCurve((i + 1) / numOfLineSegments);
+		}
+		else
+		{
+			pos[0] = pos[1];
+			pos[1] = BezierCurve((i + 1) / numOfLineSegments);
+		}
+		
 		// Draws a line determined by the vector2 array
 		SDL_RenderDrawLineF(renderer, pos[0].x, pos[0].y, pos[1].x, pos[1].y);
 	}
