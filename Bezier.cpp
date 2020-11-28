@@ -54,10 +54,10 @@ float Bezier::GetBezierTangent(float x) const
 
 float Bezier::GetDistance(Vector2 currentCarVector, Vector2 nextCarVector)
 {
-	float xDifference = currentCarVector.x - nextCarVector.x;
-	float yDifference = currentCarVector.y - nextCarVector.y;
-
+	Vector2 difference;
+	difference.x = (currentCarVector.x - nextCarVector.x);
+	difference.y = (currentCarVector.y - nextCarVector.y);
 	
-	return sqrt(xDifference * xDifference + yDifference * yDifference);
+	return difference.magnitude();
 }
 
